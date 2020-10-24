@@ -94,7 +94,7 @@ void put(){
 
     /////////// Учет кратности //////////
       
-    char arrq[10];
+    char massq[10];
     int dop=0;
     printf("есть ли еще связи?");
     scanf("%d", &dop);
@@ -106,9 +106,9 @@ void put(){
             i=0;
             while((c = getchar()) !='\n')
                 {    
-                    arrq[i]=c; i++;
+                    massq[i]=c; i++;
                 }
-            arrq[i]='\0';
+            massq[i]='\0';
         }
 
 
@@ -131,7 +131,7 @@ void put(){
         if (dop==1){
              for (int e = 0; e < i; e=e+2)
     {
-        fprintf(file, "%c -- %c;\n", arrq[e], arrq[e+1]);
+        fprintf(file, "%c -- %c;\n", massq[e], massq[e+1]);
     }
 }
     /////////// запись в дот //////////
