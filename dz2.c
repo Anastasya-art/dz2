@@ -92,7 +92,7 @@ void put(){
     }
 
 
-    ///////////  //////////
+    /////////// Учет кратности //////////
       
     char arrq[10];
     int dop=0;
@@ -111,7 +111,7 @@ void put(){
             arrq[i]='\0';
         }
 
-///////////  //////////
+
 
 
     /////////// открытие файла //////////
@@ -195,6 +195,6 @@ void put(){
     fprintf(file, "}\n");
     fclose(file);
     system("dot -Tpng graph.dot -o graph.png");
-	system("graph.dot");
+    system("graph.dot");
 
 }
