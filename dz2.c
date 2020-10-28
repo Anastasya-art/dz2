@@ -5,36 +5,10 @@
 #define MAX 120
 
 
-void put();
-void check();
-
-
 
 int main(void)
 {
-    int i;
-
-    printf("----Меню-----\n");
-    printf("Выберите действие\n1.Задать граф\n2.Проверка на связность графа\n");
-    i = getchar();
-
-    switch (i)
-    {
-    case '1':
-        put();
-        break;
-    case '2':
-        //check();
-        break;
-    
-    default:
-        break;
-    }
-
-}
-
-
-void put(){
+    system("chcp 65001");
 
     /////////// Ввод кол-ва эл-тов //////////
     char c;
@@ -42,18 +16,19 @@ void put(){
     int ln = 0, verh, rebr, i = 0, j = 0, u = 0;
     int o = 0;
 
-    printf("Количество вершин в графе: ");
+    printf("\nКоличество вершин в графе: ");
     scanf("%i", &verh);
     printf("Количество ребер: ");
     scanf("%i", &rebr);
-    //c = getchar();
 
-    printf("Ориентированный? 1-да / 2-нет\n");
+    
+
+    printf("Ориентированный? \n1 - да / 2 - нет\n");
     scanf("%d", &o);
 
 
     /////////// Ввод эл-тов //////////
-    printf("2 - петля 1 - обычная свзяь 0 - нет связи\n");
+    printf("\n2 - петля \n1 - обычная свзяь \n0 - нет связи\n");
 
     if (o == 2) 
     {
@@ -62,8 +37,7 @@ void put(){
             for (j=0; j < verh; j++)
             {
                 printf("Ребро %i соединено с вершиной %i: ", i + 1, j + 1);
-                scanf("%i", &mass[i][j]);
-                
+                scanf("%i", &mass[i][j]);    
             }
         }
     }
@@ -74,12 +48,14 @@ void put(){
         {
             for (j=0; j < verh; j++)
             {
-            printf("Если ребро %i входит в вершину, %i = 1, если выходит = -1: ", i + 1, j + 1);
-            scanf("%i", &mass[i][j]);
+                printf("Если ребро %i входит в вершину, %i = 1, если выходит = -1: ", i + 1, j + 1);
+                scanf("%i", &mass[i][j]);
             
             }
         }
     }
+
+    printf("\nКак выглядит матрица\n");
 
     for (i = 0; i < rebr; i++)
     {
@@ -92,27 +68,29 @@ void put(){
     }
 
 
-    /////////// Учет кратности //////////
+    ///////////  //////////
       
     char massq[10];
-    int dop=0;
-    printf("есть ли еще связи?");
+    int dop = 0;
+    printf("Есть ли еще связи? \n1 - да\n2 - продолжить\n");
     scanf("%d", &dop);
     getchar();
         if (dop==2)
-            {;}
+            {
+                printf("Продолаем программу\n");
+            }
         if (dop==1)
         {   
-            i=0;
+            printf("Введите буквы связываемых пар\n");
+            i = 0;
             while((c = getchar()) !='\n')
                 {    
-                    massq[i]=c; i++;
+                    massq[i]=c; 
+                    i++;
                 }
             massq[i]='\0';
         }
-
-
-
+    
 
     /////////// открытие файла //////////
     FILE* file;
@@ -195,6 +173,81 @@ void put(){
     fprintf(file, "}\n");
     fclose(file);
     system("dot -Tpng graph.dot -o graph.png");
-    system("graph.dot");
+	system("graph.dot");
+
+
+/////// Вызов функции для проверки на вязность///////
+
+    int q = 0;  
+    printf("Нужна ли проверка на связность?\n1 - нет\n2 - да\n");
+    scanf("%d", &q);
+    getchar();
+
+    if(q == 2)
+    {
+        printf ("Проверяю\n");
+    int i, j;
+    int ur = 0;
+    bool Sv = 1;
+    
+    for (int i = 0; i < rebr; i++) 
+        {
+            bool tmp = 0; 
+            for (int j = 0; j < verh; j++)
+            {
+                if (mass[i][j] == 1)
+                    tmp = 1;
+                if (mass[j][i] == 1)
+                    tmp = 1;
+            }
+            
+            if (tmp == 0)
+                Sv = 0;
+        }
+            
+            if (Sv == 0) 
+            {
+                ur = 1;
+            }
+            else {
+                ur = 0;
+            }
+    j = 0;   int u = 0;   i = 0;
+    
+    int e = 0;
+    int sum = 0, sum1 = 0;
+    bool err = false;
+
+    for (i; i < rebr; i++)
+        {
+            for (j; j < verh; j++)
+            {
+                if (mass[i][j] == 1)
+                {
+                    sum += mass[i][j];
+                    sum1 += mass[i][j];
+                }
+            }
+            
+            if (sum1 == 0) err = true;
+                sum1 = 0;
+                u++;
+                j = u;
+        }
+
+    int a = (((verh - 1) * (verh - 2)) / 2);
+
+    if ((sum >= a)&&(ur==0))
+
+      printf("\nГраф связный!");
+
+    else 
+      printf("\nГраф несвязный!");
+    }
+    else
+    {
+        printf("Программа завершена!");
+    }
 
 }
+
