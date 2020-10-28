@@ -112,6 +112,7 @@ int main(void)
         fprintf(file, "%c -- %c;\n", massq[e], massq[e+1]);
     }
 }
+    
     /////////// запись в дот //////////
 
     char q1=0;
@@ -186,68 +187,67 @@ int main(void)
     if(q == 2)
     {
         printf ("Проверяю\n");
-    int i, j;
-    int ur = 0;
-    bool Sv = 1;
+        int i, j;
+        int ur = 0;
+        bool Sv = 1;
     
-    for (int i = 0; i < rebr; i++) 
-        {
-            bool tmp = 0; 
-            for (int j = 0; j < verh; j++)
+        for (int i = 0; i < rebr; i++) 
             {
-                if (mass[i][j] == 1)
-                    tmp = 1;
-                if (mass[j][i] == 1)
-                    tmp = 1;
+                bool tmp = 0; 
+                for (int j = 0; j < verh; j++)
+                {
+                    if (mass[i][j] == 1)
+                        tmp = 1;
+                    if (mass[j][i] == 1)
+                        tmp = 1;
+                }
+                
+                if (tmp == 0)
+                    Sv = 0;
             }
-            
-            if (tmp == 0)
-                Sv = 0;
-        }
-            
-            if (Sv == 0) 
-            {
-                ur = 1;
-            }
-            else {
-                ur = 0;
-            }
+                
+                if (Sv == 0) 
+                {
+                    ur = 1;
+                }
+                else {
+                    ur = 0;
+                }
     j = 0;   int u = 0;   i = 0;
     
     int e = 0;
     int sum = 0, sum1 = 0;
     bool err = false;
 
-    for (i; i < rebr; i++)
-        {
-            for (j; j < verh; j++)
+        for (i; i < rebr; i++)
             {
-                if (mass[i][j] == 1)
+                for (j; j < verh; j++)
                 {
-                    sum += mass[i][j];
-                    sum1 += mass[i][j];
+                    if (mass[i][j] == 1)
+                    {
+                        sum += mass[i][j];
+                        sum1 += mass[i][j];
+                    }
                 }
+                
+                if (sum1 == 0) err = true;
+                    sum1 = 0;
+                    u++;
+                    j = u;
             }
-            
-            if (sum1 == 0) err = true;
-                sum1 = 0;
-                u++;
-                j = u;
+
+        int a = (((verh - 1) * (verh - 2)) / 2);
+
+        if ((sum >= a)&&(ur==0))
+
+        printf("\nГраф связный!");
+
+        else 
+        printf("\nГраф несвязный!");
+        }
+        else
+        {
+            printf("Программа завершена!");
         }
 
-    int a = (((verh - 1) * (verh - 2)) / 2);
-
-    if ((sum >= a)&&(ur==0))
-
-      printf("\nГраф связный!");
-
-    else 
-      printf("\nГраф несвязный!");
-    }
-    else
-    {
-        printf("Программа завершена!");
-    }
-
 }
-
